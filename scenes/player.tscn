@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://qvd7grc02huc"]
+
+[ext_resource type="Script" uid="uid://baujb4m8kbono" path="res://scripts/player.gd" id="1_3vyb7"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lqy16"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_lqy16"]
+
+[sub_resource type="GDScript" id="GDScript_3vyb7"]
+script/source = "extends Camera3D
+
+var mouse_sensitivity: float = 0.005
+
+"
+
+[sub_resource type="BoxMesh" id="BoxMesh_lqy16"]
+size = Vector3(0.1, 0.2, 1)
+
+[node name="player" type="CharacterBody3D" unique_id=997857385 node_paths=PackedStringArray("player_camera", "camera_pivot")]
+script = ExtResource("1_3vyb7")
+player_camera = NodePath("camera_pivot/player_camera")
+camera_pivot = NodePath("camera_pivot")
+
+[node name="player_collision" type="CollisionShape3D" parent="." unique_id=1905922010]
+shape = SubResource("CapsuleShape3D_lqy16")
+
+[node name="player_mesh" type="MeshInstance3D" parent="." unique_id=185612563]
+mesh = SubResource("CapsuleMesh_lqy16")
+
+[node name="camera_pivot" type="Marker3D" parent="." unique_id=140434253]
+transform = Transform3D(1, 0, 0, 0, 0.99354404, 0.11344731, 0, -0.11344731, 0.99354404, 0, 0, 0)
+
+[node name="player_camera" type="Camera3D" parent="camera_pivot" unique_id=1878079227]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0.967, 1.499)
+fov = 90.0
+script = SubResource("GDScript_3vyb7")
+
+[node name="gun_mesh" type="MeshInstance3D" parent="." unique_id=1913435649]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46001875, 0.473638, -0.26030707)
+mesh = SubResource("BoxMesh_lqy16")
